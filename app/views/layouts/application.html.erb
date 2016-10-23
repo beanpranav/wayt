@@ -1,14 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Wayt</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <title>what are your thoughts?</title>
+	  <%= favicon_link_tag "/images/wayt_favicon.ico" %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	  <link href="//netdna.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.css" rel="stylesheet">
   <%= csrf_meta_tags %>
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+<!-- RENDER HEADER -->
+	<%= render "layouts/header" %>
 
-<%= yield %>
+<!-- RENDER BODY -->
+	<div class="container">
+		<div class="col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">	
+			<% flash.each do |name,msg| %>
+				<button type="button" class="close alert-dismiss-fit" data-dismiss="alert">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">Close</span>
+				</button>
+				<%= content_tag(:div, msg, class: "alert alert-info alert-fit") %>
+			<% end %>
+		</div>
+
+		<%= yield %>
+	</div>
+
+<!-- RENDER FOOTER -->
+	<%= render "layouts/footer" %>
 
 </body>
 </html>
