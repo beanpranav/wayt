@@ -1,0 +1,22 @@
+<div class="section-user-setting">
+  <div class="fit-comfort">
+    <h4>My Account Settings</h4>
+  </div>
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+    <div class="fit-comfort fit-top-border">
+      <p><%= devise_error_messages!.html_safe %></p>
+      <p><%= f.text_field :name, placeholder: "full name", class: "form-control center" %></p>
+      <p><%= f.email_field :email, placeholder: "email", disabled: "disabled", class: "form-control center" %></p>
+    </div>
+    <div class="fit-comfort fit-top-border">
+    <h3>change password?</h3>
+      <p><%= f.password_field :password, placeholder: "new password", class: "form-control center", :autocomplete => "off" %></p>
+      <p><%= f.password_field :password_confirmation, placeholder: "re-type new password", class: "form-control center" %></p>
+    </div>
+    <div class="fit-comfort fit-top-border">
+      <p></p>
+      <p><%= f.password_field :current_password, placeholder: "current password (required)", class: "form-control center" %></p>
+      <p><%= f.submit "SAVE CHANGES", class: "btn btn-block btn-primary btn-primary-action" %></p>
+    </div>
+  <% end %>
+</div>

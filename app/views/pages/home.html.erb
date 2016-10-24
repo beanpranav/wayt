@@ -1,12 +1,27 @@
 <div class="section">
-	<div class="topbar">
-		<div class="pull-left main-nav-text">
-			Conversations
+	<% if user_signed_in? %>
+
+		<div class="topbar">
+			<div class="pull-left main-nav-text">
+				Conversations
+			</div>
+			<button class="pull-right btn btn-primary btn-primary-action">COMPOSE</button>
 		</div>
-		<button class="pull-right btn btn-primary btn-primary-action">COMPOSE</button>
-	</div>
-	<div class="page-content">
-		<h3>Welcome to my app!</h3>
-		<p>text here ...</p>
-	</div>
+		<div class="page-content">
+			<h2>Welcome to my app!</h2>
+			<p>text here ...</p>
+		</div>
+
+	<% else %>
+
+		<div class="page-content">
+			<h2>Welcome to my app!</h2>
+			<p>text here ...</p>
+			<p>
+				<%= link_to "Log in", new_user_session_path, class: "btn btn-default btn-primary-action" %>
+				<%= link_to "Sign up", new_user_registration_path, class: "btn btn-primary btn-primary-action" %>
+			</p>
+		</div>
+
+	<% end %>
 </div>

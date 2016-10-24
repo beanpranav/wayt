@@ -1,0 +1,19 @@
+<div class="section-userform">
+	<div class="fit-comfort">
+		<%= image_tag("/images/wayt_logo.png", alt: "what are your thoughts?") %>
+	</div>
+
+	<div class="fit-comfort fit-top-border">
+		<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+			<h3>Have fun conversing, discussing and debating ideas with your close friends</h3>
+			<p><%= devise_error_messages!.html_safe %></p>
+			<p><%= f.text_field :name, placeholder: "full name", class: "form-control center", :autofocus => true %></p>
+			<p><%= f.email_field :email, placeholder: "email", class: "form-control center" %></p>
+			<p><%= f.password_field :password, placeholder: "password", class: "form-control center" %></p>
+			<p><%= f.password_field :password_confirmation, placeholder: "re-type password", class: "form-control center" %></p>
+			<p><%= f.submit "SIGN UP", class: "btn btn-block btn-primary btn-primary-action" %></p>
+		<% end %>
+	</div>
+
+	<%= render "devise/shared/links" %>
+</div>

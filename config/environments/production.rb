@@ -33,6 +33,8 @@ Rails.application.configure do
   config.assets.digest = true
 
   # `config.assets.precompile` has moved to config/initializers/assets.rb
+  # Version of your assets, change this if you want to expire all your assets.
+  config.assets.version = '1.0'
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
@@ -79,4 +81,36 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Needed for Exception Notification Gem
+  config.middleware.use ExceptionNotification::Rack,
+                      :email => {
+                          :email_prefix => "[WAYT Bug Report] ",
+                          :sender_address => %{"Exception Notifier" <support@whatareyourthoughts.org>},
+                          :exception_recipients => %w{pranav@whatareyourthoughts.org}
+                      }
+
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #       :address        => 'smtp.sendgrid.net',
+  #       :port           => '587',
+  #       :authentication => :plain,
+  #       :user_name      => ENV['SENDGRID_USERNAME'],
+  #       :password       => ENV['SENDGRID_PASSWORD'],
+  #       :domain         => 'heroku.com',
+  #       :enable_starttls_auto => true
+  # }
+
+  # Required for Heroku - set to host name
+  config.action_mailer.default_url_options = { :host => 'www.whatareyourthoughts.org' }
+
+  # Sets Paperclip to upload images to Amazon s3
+  # config.paperclip_defaults = {
+  #   :storage => :s3,
+  #   :s3_credentials => {
+  #     :bucket => ENV['S3_BUCKET_NAME'],
+  #     :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+  #     :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+  #   }
+  # }
 end

@@ -45,13 +45,12 @@ gem 'friendly_id', '~> 5.0.0'
 # In place editing like medium.com
 gem 'medium-editor-rails'
 
-# Ruby good coding behvior
-gem 'rubocop', '~> 0.39.0', require: false
-## rubocop:disable Metrics/LineLength, Style/StringLiterals, MethodLength
-
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
+  # Ruby good coding behvior
+  gem 'rubocop', '~> 0.39.0', require: false
+  ## rubocop:disable Metrics/LineLength, Style/StringLiterals, MethodLength
 end
 
 group :production do
