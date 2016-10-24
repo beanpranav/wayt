@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600');
 
 $font-family-sans-serif: 			'Open Sans', Arial, sans-serif;
 
@@ -38,14 +38,24 @@ $navbar-default-brand-color: 	white;
 h1 { 
 	font-size: 2.8rem;
 	margin: 0 0 1em;
+	color: $brand-font;
+}
+h3 { 
+	font-size: 2rem;
+	margin: 0 0 1rem;
+	color: $brand-font;
+	font-weight: bold;
 }
 p { 
-	font-size: 1.4rem;
+	font-size: 1.6rem;
 	margin: 0 0 1.5em;
+	line-height: 1.65em;
+	word-spacing: 0.04em;
+	color: $brand-font;
 }
 .main-nav-text {
 	padding: 4px 0;
-	font-size: 17px;
+	font-size: 1.7rem;
 	color: $brand-font-gray;
 }
 .main-nav-text:hover { color: $brand-font; }
