@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   has_many :conversations, dependent: :destroy
 
   has_many :participations, dependent: :destroy
-  has_many :participated_conversations, through: :participations
+  has_many :participated_conversations, through: :participations, source: :conversation
 
   def first_name
     name.split(' ').first

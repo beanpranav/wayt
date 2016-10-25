@@ -1,7 +1,8 @@
 # rubocop:disable Metrics/LineLength
 class FriendshipsController < ApplicationController
   before_action :set_friendship, only: [:show, :edit, :update, :destroy]
-  before_action :involved?, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_involvement, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   def index
     @friendships = Friendship.all
@@ -52,11 +53,9 @@ class FriendshipsController < ApplicationController
     @friendship = Friendship.find(params[:id])
   end
 
-  def involved?
-    if @friendship.user == current_user || @friendship.friend == current_user
-      true
-    else
-      redirect_to root_path, notice: 'You cannot see this '
+  def authenticate_involvement
+    unless @friendship.user == current_user || @friendship.friend == current_user
+      redirect_to root_path, notice: "You don't have persmission to view this page."
     end
   end
 

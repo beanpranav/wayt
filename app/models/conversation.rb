@@ -1,6 +1,6 @@
 # conversation model
 class Conversation < ActiveRecord::Base
-  validates_presence_of :user_id, :subject
+  validates_presence_of :user_id, :subject, :first_comment
 
   extend FriendlyId
   friendly_id :subject, use: :slugged

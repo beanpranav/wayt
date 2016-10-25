@@ -1,4 +1,6 @@
-<p id="notice"><%= notice %></p>
+<%= @conversation.user.first_name %>
+<%= @conversation.participations.count %>
+<%= @conversation.participants.any? { |p| p == current_user } %>
 
 <p>
   <strong>Subject:</strong>
