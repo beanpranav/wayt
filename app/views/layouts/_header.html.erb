@@ -1,4 +1,4 @@
-<% if request.path != '/sign_up' && request.path != '/login' %>
+<% if request.path != '/sign_up' && request.path != '/login' && controller_name != "passwords" %>
 
   <nav class="navbar navbar-default navbar-static-top header-set" role="navigation">
     <div class="container">
@@ -10,7 +10,9 @@
         </button>
 
         <%= link_to image_tag("/images/wayt_logo.png",
-        alt: "what are your thoughts?"), root_path, class: "navbar-brand" %>
+        alt: "what are your thoughts?"), root_path, class: "navbar-brand hidden-xs" %>
+        <%= link_to image_tag("/images/wayt_logo.png", alt: "what are your thoughts?",
+        height: 40), root_path, class: "navbar-brand visible-xs" %>
     </div>
 
     <div class="collapse navbar-collapse" id="nav-collapse">

@@ -7,7 +7,7 @@
 		<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 			<%= devise_error_messages! %>
 			<h3>Welcome back!</h3>
-			<p><%= f.email_field :email, placeholder: 'email', class: "form-control center" %></p>
+			<p><%= f.email_field :email, placeholder: 'email', class: "form-control center", :autofocus => true %></p>
 			<p><%= f.password_field :password, placeholder: "password", class: "form-control center" %></p>
 			<p><%= f.submit "LOG IN", class: "btn btn-block btn-primary btn-primary-action" %></p>
 			<div style="margin-top:-1.3em">
