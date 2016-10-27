@@ -2,6 +2,6 @@
 class RegistrationsController < Devise::RegistrationsController
   def create
     super
-    UserMailer.send_signup_email(resource).deliver unless resource.invalid?
+    UserNotifier.send_signup_email(resource).deliver unless resource.invalid?
   end
 end
