@@ -6,11 +6,11 @@ class Participation < ActiveRecord::Base
   belongs_to :conversation
   has_many :comments, dependent: :destroy
 
-  scope :read, -> { where(read: true) }
+  scope :unread, -> { where(read: false) }
   scope :important, -> { where(important: true) }
 
-  def read?
-    read
+  def unread?
+    !read
   end
 
   def important?

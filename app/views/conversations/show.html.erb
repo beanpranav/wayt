@@ -1,36 +1,83 @@
-<%= @conversation.user.first_name %>
-<%= @conversation.participations.count %>
-<%= @conversation.participants.any? { |p| p == current_user } %>
+<div class="section">
 
-<p>
-  <strong>Subject:</strong>
-  <%= @conversation.subject %>
-</p>
+  <div class="top-bar">
+    <%= link_to "COMPOSE", new_conversation_path, class: "pull-right btn btn-secondary btn-secondary-action" %>
+    <div class="main-nav-text">
+      <a href="<%= root_path %>">
+        Conversations
+        <%= "(#{current_user.participations.unread.count})" if current_user.participations.unread.count > 0 %>
+      </a>
+    </div>
+  </div>
 
-<p>
-  <strong>Source author:</strong>
-  <%= @conversation.source_author %>
-</p>
+  <div class="page-content">
 
-<p>
-  <strong>Source link:</strong>
-  <%= @conversation.source_link %>
-</p>
+    <span class="time-stamp"><%= @conversation.created_at.strftime('%b %d, %Y') %></span>
+    <div class="subtitle text-truncate-75">
+      <% if @conversation.participants.count > 1 %>
+        Discussion: <%= @conversation.owner.first_name %>
+        <% @conversation.participants.distinct.drop(1).each do |ep| %>
+          , <%= ep.first_name %>
+        <% end %>
+      <% else %>
+        Self Reflection
+      <% end %>
+      <%= "(" + @comments.count.to_s + ")" if @comments.count > 1 %>
+    </div>
 
-<p>
-  <strong>Source content:</strong>
-  <%= @conversation.source_content %>
-</p>
+    <h1><%= @conversation.subject %></h1>
+    
+    <div class="subtitle">
+      <% unless @conversation.source_link.empty? %>
+        <a href="<%= @conversation.source_link %>">Inspiration</a> | 
+      <% end %>
+      <%= link_to "mark as unread", mark_as_unread_participation_path(@participation), method: :post %>
+    </div>
+  </div>
 
-<p>
-  <strong>Slug:</strong>
-  <%= @conversation.slug %>
-</p>
+  <% @comments.tap do |*older_comments, last_comment| %>
 
-<p>
-  <strong>User:</strong>
-  <%= @conversation.user_id %>
-</p>
+    <% older_comments.each do |c| %>
+      <a data-toggle="collapse" href="#comment-<%= c.id %>" aria-controls="comment-<%= c.id %>">
+        <div class="fit-comment">
+          <span class="time-stamp hidden-xs"><%= time_ago(c.created_at) %></span>
+          <span class="time-stamp visible-xs"><%= time_ago_short(c.created_at) %></span>
+          <h5><%= c.commenter.name %></h5>
+        </div>
+      </a>
 
-<%= link_to 'Edit', edit_conversation_path(@conversation) %> |
-<%= link_to 'Back', conversations_path %>
+      <div class="fit-comment-content collapse <%= 'in' if c.created_at - @participation.updated_at > -120 %>" id="comment-<%= c.id %>">
+        <p><%= c.content.gsub('div>', 'p>').html_safe %></p>
+      </div>
+    <% end %>
+
+    <div class="fit-comment">
+      <span class="time-stamp hidden-xs"><%= time_ago(last_comment.created_at) %></span>
+      <span class="time-stamp visible-xs"><%= time_ago_short(last_comment.created_at) %></span>
+      <h5><%= last_comment.commenter.name %></h5>
+    </div>
+
+    <div class="fit-comment-content fit-last-comment">
+      <p><%= last_comment.content.gsub('div>', 'p>').html_safe %></p>
+    </div>
+
+  <% end %>
+
+</div>
+
+<div class="section">
+  <%= form_for (@comment) do |f| %>
+    <%= f.hidden_field :participation_id, value: @participation.id %>
+    <%= f.hidden_field :conversation_id, value: @conversation.id %>
+
+    <div class="page-content">
+      <span class="time-stamp">now</span>
+      <h5><%= current_user.name %></h5>
+      <%= f.trix_editor :content, placeholder: 'what are your thoughts?' %>
+    </div>
+    <div class="bottom-bar center fit-top-border">
+      <%= f.submit 'SEND', class: "btn btn-primary btn-primary-action" %>
+      <%= link_to 'DISCARD', conversation_path(@conversation), class: "btn btn-default btn-default-action" %>
+    </div>
+  <% end %>
+</div>

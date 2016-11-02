@@ -1,19 +1,8 @@
 <div class="section">
 	<% if user_signed_in? %>
 
-		<div class="topbar">
-			<div class="pull-left main-nav-text">
-				Conversations (2)
-			</div>
-			<%= link_to "COMPOSE", new_conversation_path, class: "pull-right btn btn-secondary btn-secondary-action" %>
-
-		</div>
-		<div class="page-content">
-			<h2>Welcome to my app!</h2>
-			<p>text here ...</p>
-			<%= @conversations.count %>
-		</div>
-
+		<%= render 'conversation_list' %>
+	
 	<% else %>
 
 		<div class="page-content">

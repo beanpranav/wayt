@@ -1,43 +1,59 @@
 <%= form_for(@conversation) do |f| %>
   <% if @conversation.errors.any? %>
-    <div id="error_explanation">
-      <ul>
+    <div id="error_explanation center">
       <% @conversation.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <%= content_tag(:div, message, class: 'alert alert-danger alert-fit-mini center') %>
       <% end %>
-      </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :subject %><br>
-    <%= f.text_field :subject %>
+  <div class="section">
+
+    <div class="top-bar">
+      <div class="main-nav-text"><a href="<%= root_path %>">Start Conversation</a></div>
+    </div>
+
+    <div class="fit-conversation">
+      <div class="fit-form-to">
+        <div class="form-label-to">To:</div>
+        <div class="fit-recipients" data-toggle="buttons">
+          <div class="btn btn-checkbox btn-checkbox-self" disabled="disabled">Self</div>
+          <label class="btn btn-checkbox">
+            <%= check_box("recipient", "ids", {:multiple => true}, 1, nil) %> Ayush
+          </label>
+          <label class="btn btn-checkbox">
+            <%= check_box("recipient", "ids", {:multiple => true}, 2, nil) %> Pragya
+          </label>
+          <label class="btn btn-checkbox">
+            <%= check_box("recipient", "ids", {:multiple => true}, 3, nil) %> Varun
+          </label>
+        </div>
+      </div>
+      
+      <div class="fit-form">
+        <%= f.text_field :subject, placeholder: "question or topic of discussion", class: "form-format form-format-subject", autofocus: true %>
+        <span class="form-label">Subject:</span>
+      </div>
+      
+      <div class="fit-form">
+        <%= f.text_field :source_link, placeholder: "http://... paste link to article or video (optional)", class: "form-format form-format-link" %>
+        <span class="form-label">Inspiration:</span>
+      </div>
+    </div>
+
+    <% unless params[:action] == 'edit' %>
+      <%= fields_for (Comment.new) do |fc| %>
+        <div class="page-content fit-top-border">
+          <h5>What are your thoughts?</h5>
+          <%= fc.trix_editor :content, placeholder: 'what are your thoughts?' %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <div class="bottom-bar center fit-top-border">
+      <%= f.submit 'SEND', class: "btn btn-primary btn-primary-action" %>
+      <%= link_to 'DISCARD', root_path, class: "btn btn-default btn-default-action" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :source_author %><br>
-    <%= f.text_field :source_author %>
-  </div>
-  <div class="field">
-    <%= f.label :source_link %><br>
-    <%= f.text_field :source_link %>
-  </div>
-  <div class="field">
-    <%= f.label :source_content %><br>
-    <%= f.text_area :source_content %>
-  </div>
-  <div class="field">
-    <%= f.label :slug %><br>
-    <%= f.text_field :slug %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :first_comment %><br>
-    <%= f.text_area :first_comment %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
 <% end %>

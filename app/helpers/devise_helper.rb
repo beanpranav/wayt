@@ -1,5 +1,6 @@
+# devise helper: error display
 module DeviseHelper
   def devise_error_messages!
-    resource.errors.full_messages.map { |msg| content_tag(:div, msg, class: "alert alert-info alert-fit", style: "margin-bottom: 1em;") }.join
+    resource.errors.full_messages.map { |msg| content_tag(:div, msg, class: 'alert alert-danger alert-fit-mini', style: 'margin-bottom: 1em;') }.join
   end
 end

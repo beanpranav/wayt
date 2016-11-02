@@ -2,10 +2,11 @@
 class PagesController < ApplicationController
   def home
     if user_signed_in?
-      @conversations = current_user.participations
+      @participations = current_user.participations_ordered_by_comments
+      # participations.includes(:comments).order("comments.created_at desc")
     end
   end
 
-  def test_email
+  def contacts
   end
 end

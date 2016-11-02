@@ -30,4 +30,8 @@ class User < ActiveRecord::Base
   #     splitname.first.first.upcase + splitname[1].first.upcase
   #   end
   # end
+
+  def participations_ordered_by_comments
+    Participation.where(user_id: id).includes(:comments).order('comments.created_at desc')
+  end
 end

@@ -17,9 +17,8 @@
     <% @conversations.each do |conversation| %>
       <tr>
         <td><%= conversation.subject %></td>
-        <td><%= conversation.source_author %></td>
+        <td><%= conversation.recipient_ids %></td>
         <td><%= conversation.source_link %></td>
-        <td><%= conversation.source_content %></td>
         <td><%= conversation.slug %></td>
         <td><%= conversation.user_id %></td>
         <td><%= link_to 'Show', conversation %></td>

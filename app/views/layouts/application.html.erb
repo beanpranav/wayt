@@ -2,10 +2,10 @@
 <html>
 <head>
   <title>what are your thoughts?</title>
-	  <%= favicon_link_tag "/images/wayt_favicon_nobg.ico" %>
+	<%= favicon_link_tag "/images/wayt_favicon_nobg.ico" %>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-	  <link href="//netdna.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.css" rel="stylesheet">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.css" rel="stylesheet">
   <%= csrf_meta_tags %>
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -18,7 +18,7 @@
 				<span aria-hidden="true">&times;</span>
 				<span class="sr-only">Close</span>
 			</button>
-			<%= content_tag(:div, msg, class: "alert alert-info alert-fit") %>
+			<%= content_tag(:div, msg, class: "alert alert-warning alert-fit") %>
 		<% end %>
 		</div>
 		<%= yield %>
@@ -26,3 +26,4 @@
 	<%= render "layouts/footer" %>
 </body>
 </html>
+

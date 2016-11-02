@@ -10,6 +10,9 @@ class ConversationsController < ApplicationController
   end
 
   def show
+    @participation = @conversation.my_participation(current_user.id)
+    @comment = @participation.comments.build
+    @comments = @conversation.comments
   end
 
   def new
@@ -21,14 +24,21 @@ class ConversationsController < ApplicationController
 
   def create
     @conversation = current_user.conversations.build(conversation_params)
+    @conversation.recipient_ids = params[:recipient].nil? ? [] : params[:recipient][:ids]
+    # raise params
 
     respond_to do |format|
-      if @conversation.save
-        owner = @conversation.participations.build(user_id: current_user.id, others_count: 0)
+      if params[:comment][:content].present? && @conversation.save
+        owner = @conversation.participations.build(user_id: current_user.id, read: true, others_count: 0)
         owner.save
-        format.html { redirect_to @conversation, notice: 'Conversation was successfully created.' }
+        comment = @conversation.comments.build(participation_id: owner.id, content: params[:comment][:content])
+        comment.save
+        format.html { redirect_to @conversation, notice: 'Conversation started' }
       else
         format.html { render action: 'new' }
+        unless params[:comment][:content].present?
+          @conversation.errors.add(:subject, "& first comment can't be blank")
+        end
       end
     end
   end
@@ -57,7 +67,7 @@ class ConversationsController < ApplicationController
   end
 
   def authenticate_owner
-    unless @conversation.user == current_user
+    unless @conversation.owner == current_user
       redirect_to root_path, notice: "You don't have persmission to view this page."
     end
   end
@@ -69,6 +79,6 @@ class ConversationsController < ApplicationController
   end
 
   def conversation_params
-    params.require(:conversation).permit(:subject, :source_author, :source_link, :source_content, :first_comment, :slug, :user_id, :friendship_id)
+    params.require(:conversation).permit(:subject, :recipient_ids, :source_link, :slug, :user_id)
   end
 end
