@@ -33,11 +33,11 @@ class ConversationsController < ApplicationController
         owner.save
         comment = @conversation.comments.build(participation_id: owner.id, content: params[:comment][:content])
         comment.save
-        format.html { redirect_to @conversation, notice: 'Conversation started' }
+        format.html { redirect_to @conversation, notice: 'Conversation started.' }
       else
         format.html { render action: 'new' }
         unless params[:comment][:content].present?
-          @conversation.errors.add(:subject, "& first comment can't be blank")
+          @conversation.errors.add(:subject, "& first comment cannot be blank.")
         end
       end
     end
@@ -46,7 +46,7 @@ class ConversationsController < ApplicationController
   def update
     respond_to do |format|
       if @conversation.update(conversation_params)
-        format.html { redirect_to @conversation, notice: 'Conversation was successfully updated.' }
+        format.html { redirect_to @conversation, notice: 'Conversation updated.' }
       else
         format.html { render action: 'edit' }
       end

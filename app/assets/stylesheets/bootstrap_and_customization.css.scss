@@ -80,11 +80,12 @@ h5 {
 }
 .subtitle { margin: 0; }
 .recipient-text { margin: -1px 0 0; color: $brand-font; }
-.preview-text { margin: 0; color: $brand-font-gray !important; }
+.preview-text, .toggleable-preview-text { margin: 0; color: $brand-font-gray !important; }
+.toggleable-preview-text { position: relative; top: 4px; left: 11px; }
 .time-stamp {
 	font-family: $font-family-headers;
 	float: right;
-	margin: 4px 0 0;
+	margin: 3px 0 0;
 	color: $brand-font-gray;
 }
 
@@ -113,7 +114,12 @@ label { font-weight: normal; margin-bottom: 0px; }
 	width: 75%; 
 	white-space: nowrap;
 }
-
+.text-truncate-preview {	
+	width: 80%; 
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: clip;
+}
 
 // ----------- Sections --------------------------------------------------------
 .section, .section-userform, .section-user-setting {
@@ -122,6 +128,7 @@ label { font-weight: normal; margin-bottom: 0px; }
 	background-color: $secondary-bg;
 	border: solid 1px $body-border;
 	border-radius: 3px;
+	// box-shadow: 0 2px 10px $body-border;
 }
 .section-userform, .section-user-setting {
 	width: 350px;
@@ -141,7 +148,7 @@ label { font-weight: normal; margin-bottom: 0px; }
 .page-content, .fit-comment, .fit-comment-content { padding: 30px 50px; }
 
 .fit-comfort { padding: 20px 30px; }
-.fit-list { padding: 15px 0 25px; }
+.fit-list { padding: 15px 0 30px; }
 .fit-list-item { padding: 15px 22px 15px 53px; }
 .fit-list-actions {
 	float: left;
@@ -169,7 +176,7 @@ label { font-weight: normal; margin-bottom: 0px; }
 	margin: -2.3rem 0 0;
 }
 .fit-last-comment { margin-bottom: 17px; }
-
+.toggleable { cursor: pointer; }
 
 
 .fit-top-border { border-top: solid 1px $body-border; }
@@ -182,21 +189,15 @@ label { font-weight: normal; margin-bottom: 0px; }
 
 .alert {
   margin: 10px auto -40px;
+  padding: 4px 20px;
   /* border: 1px solid transparent; */
   border-radius: 3px;
-  max-width: 300px;
+  min-width: 300px;
+  max-width: 400px;
   text-align: center;
   position: relative;
   top: 0px;
 }
-.alert-fit { padding: 4px 20px; }
-.alert-fit-mini { 
-	padding: 5px 20px;
-	margin: 8px auto -40px;
-	max-width: 300px; 
-}
-.alert-dismiss-fit { margin: 8px 15px 0 0; }
-
 
 
 // ----------- Buttons --------------------------------------------------------
@@ -413,9 +414,12 @@ trix-editor {
 		margin: 20px auto;
 	}
 	.alert { margin: -1px -2px -11px; }
-	.page-content { padding: 20px 20px; }
+	.page-content, .fit-comment { padding: 20px 20px; }
+	.fit-comment-content { padding: 0px 20px 10px 20px; }
 	.fit-comfort { padding: 20px 20px; }
 	.btn-primary-action, .btn-secondary-action, .btn-default-action { min-width: 100px; }
+
+	.text-truncate-75, .text-truncate-preview { width: 70%; } 
 }
 
 @media (max-width: 767px) {

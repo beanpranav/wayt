@@ -38,17 +38,30 @@
   <% @comments.tap do |*older_comments, last_comment| %>
 
     <% older_comments.each do |c| %>
-      <a data-toggle="collapse" href="#comment-<%= c.id %>" aria-controls="comment-<%= c.id %>">
-        <div class="fit-comment">
+
+      <div class="fit-comment toggleable" id="comment-<%= c.id %>" onclick="show('comment-<%= c.id %>-full', 'comment-<%= c.id %>')"
+        style="display:<%= c.created_at - @participation.updated_at > -120 ? 'none' : 'block' %>;">
+        <span class="time-stamp hidden-xs"><%= time_ago(c.created_at) %></span>
+        <span class="time-stamp visible-xs"><%= time_ago_short(c.created_at) %></span>
+        <div class="text-truncate-preview">
+          <h5 class="pull-left"><%= c.commenter.name %></h5>
+          <span class="toggleable-preview-text"><%= strip_tags(c.content.gsub('<br>',' ')) %></span>
+        </div>
+      </div>
+
+      <div id="comment-<%= c.id %>-full" onclick="show('comment-<%= c.id %>', 'comment-<%= c.id %>-full')"
+        style="display:<%= c.created_at - @participation.updated_at > -120 ? 'block' : 'none' %>;"">
+        <div class="fit-comment toggleable">
           <span class="time-stamp hidden-xs"><%= time_ago(c.created_at) %></span>
           <span class="time-stamp visible-xs"><%= time_ago_short(c.created_at) %></span>
           <h5><%= c.commenter.name %></h5>
         </div>
-      </a>
 
-      <div class="fit-comment-content collapse <%= 'in' if c.created_at - @participation.updated_at > -120 %>" id="comment-<%= c.id %>">
-        <p><%= c.content.gsub('div>', 'p>').html_safe %></p>
+        <div class="fit-comment-content">
+          <p><%= c.content.gsub('div>', 'p>').html_safe %></p>
+        </div>
       </div>
+
     <% end %>
 
     <div class="fit-comment">
@@ -81,3 +94,11 @@
     </div>
   <% end %>
 </div>
+
+
+<script type="text/javascript">
+  function show(target, source){
+     document.getElementById(target).style.display = 'block';
+     document.getElementById(source).style.display = 'none';
+  }
+</script>

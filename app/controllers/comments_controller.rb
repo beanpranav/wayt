@@ -10,9 +10,9 @@ class CommentsController < ApplicationController
         @conversation.participations.each do |part|
           part.update_attribute(:read, false) unless part.user == current_user
         end
-        format.html { redirect_to participation_path(params[:comment][:participation_id]), notice: 'Message sent' }
+        format.html { redirect_to participation_path(params[:comment][:participation_id]), notice: 'Message sent.' }
       else
-        format.html { redirect_to participation_path(params[:comment][:participation_id]), notice: 'Failed to send message' }
+        format.html { redirect_to participation_path(params[:comment][:participation_id]), notice: 'Failed to send message.' }
       end
     end
   end

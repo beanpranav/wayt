@@ -14,11 +14,7 @@
 	<div class="container">
 		<div>
 		<% flash.each do |name,msg| %>
-			<button type="button" class="close alert-dismiss-fit" data-dismiss="alert">
-				<span aria-hidden="true">&times;</span>
-				<span class="sr-only">Close</span>
-			</button>
-			<%= content_tag(:div, msg, class: "alert alert-warning alert-fit") %>
+			<%= content_tag(:div, msg, class: "alert alert-warning",  id: "dismiss-alert") %>
 		<% end %>
 		</div>
 		<%= yield %>
@@ -27,3 +23,8 @@
 </body>
 </html>
 
+<script type="text/javascript">
+	$(".alert").fadeTo(2000, 1).fadeOut("slow", function(){
+    $(".alert").fadeOut("slow");
+	});
+</script>

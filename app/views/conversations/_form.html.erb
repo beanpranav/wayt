@@ -2,7 +2,7 @@
   <% if @conversation.errors.any? %>
     <div id="error_explanation center">
       <% @conversation.errors.full_messages.each do |message| %>
-        <%= content_tag(:div, message, class: 'alert alert-danger alert-fit-mini center') %>
+        <%= content_tag(:div, message, class: 'alert alert-danger center') %>
       <% end %>
     </div>
   <% end %>
