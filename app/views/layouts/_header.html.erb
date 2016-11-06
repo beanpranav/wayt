@@ -24,12 +24,19 @@
                   <%= current_user.first_name %><i class="fa fa-caret-down fa-fw"></i> 
                 </a>
                 <ul class="dropdown-menu">
-                  <li><%= link_to "My Account", edit_user_registration_path %></li>
+                  <li><a href="<%= root_path %>" class="<%= 'active-link' if current_page?(root_path) %>">Discussions</a></li>
+                  <li><a href="<%= friendships_path %>" class="<%= 'active-link' if current_page?(friendships_path) %>">Close Friends</a></li>
+                  <li class="divider"></li>
+                  <li><a href="<%= edit_user_registration_path %>" class="<%= 'active-link' if current_page?(edit_user_registration_path) %>">My Account</a></li>
                   <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
                 </ul>
               </li>
 
-              <li><%= link_to "My Account", edit_user_registration_path, class: "visible-xs" %></li>
+
+              <li><a href="<%= root_path %>" class="visible-xs <%= 'active-link' if current_page?(root_path) %>">Discussions</a></li>
+              <li><a href="<%= friendships_path %>" class="visible-xs <%= 'active-link' if current_page?(friendships_path) %>">Close Friends</a></li>
+              <li class="divider visible-xs"></li>
+              <li><a href="<%= edit_user_registration_path %>" class="visible-xs <%= 'active-link' if current_page?(edit_user_registration_path) %>">My Account</a></li>
               <li><%= link_to "Log Out", destroy_user_session_path, class: "visible-xs", method: :delete %></li>
 
           <% else %>
