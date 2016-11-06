@@ -4,7 +4,7 @@
     <%= link_to "COMPOSE", new_conversation_path, class: "pull-right btn btn-secondary btn-secondary-action" %>
     <div class="main-nav-text">
       <a href="<%= root_path %>">
-        Conversations
+        Conversation
         <%= "(#{current_user.participations.unread.count})" if current_user.participations.unread.count > 0 %>
       </a>
     </div>

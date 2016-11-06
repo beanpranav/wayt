@@ -9,9 +9,12 @@
 		<%= @user.first_name %> started a new discussion - <%= @conversation.subject %> and would love to get your inputs.
 	</p>
 	<p>
-		Read the discussion <a href="<%= conversation_path(@conversation) %>">here</a>.
+		Read the discussion <a href="<%= conversation_url(@conversation) %>">here</a>.
 	</p>
-	<p>Best,<br>Pranav Gupta</p>
-	<%= image_tag("/images/wayt_logo.png", alt: "what are your thoughts?") %>
+	<p>
+		Best,
+		<br>Pranav Gupta
+		<br><a href="root_url">what are your thoughts?</a>
+	</p>
 </body>
 </html>

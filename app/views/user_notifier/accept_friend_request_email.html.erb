@@ -6,13 +6,16 @@
 <body>
 	<p>Hi <%= @user.first_name %>,</p>
 	<p>
-		#{@friend.first_name} has accepted your friend request.
+		<%= @friend.first_name %> has accepted your friend request.
 		<br>Enjoy having in-depth conversations, discussions and debates.
 	</p>
 	<p>
-		<a href="<%= new_conversation_path %>">Start a new conversation.</a>
+		<a href="<%= new_conversation_url %>">Start a new conversation.</a>
 	</p>
-	<p>Best,<br>Pranav Gupta</p>
-	<%= image_tag("/images/wayt_logo.png", alt: "what are your thoughts?") %>
+	<p>
+		Best,
+		<br>Pranav Gupta
+		<br><a href="root_url">what are your thoughts?</a>
+	</p>
 </body>
 </html>

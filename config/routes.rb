@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
 
   resources :comments
-  resources :conversations, path: 'discussions'
+  resources :conversations
 
   resources :participations do
     member do
