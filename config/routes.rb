@@ -1,10 +1,14 @@
 # rubocop:disable Metrics/LineLength
 Rails.application.routes.draw do
+  resources :friendships, path: 'close_friends' do
+    member do
+      post :accept
+    end
+  end
 
-  resources :friendships
   resources :comments
   resources :conversations
-  
+
   resources :participations do
     member do
       post :mark_as_unread

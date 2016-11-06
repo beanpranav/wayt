@@ -25,19 +25,23 @@ class ConversationsController < ApplicationController
   def create
     @conversation = current_user.conversations.build(conversation_params)
     @conversation.recipient_ids = params[:recipient].nil? ? [] : params[:recipient][:ids]
-    # raise params
 
     respond_to do |format|
       if params[:comment][:content].present? && @conversation.save
-        owner = @conversation.participations.build(user_id: current_user.id, read: true, others_count: 0)
-        owner.save
-        comment = @conversation.comments.build(participation_id: owner.id, content: params[:comment][:content])
+        owner_participation = @conversation.participations.build(user_id: current_user.id, read: true, others_count: @conversation.recipient_ids.length)
+        owner_participation.save
+        @conversation.recipient_ids.each do |id|
+          friend_participation = @conversation.participations.build(user_id: id, others_count: @conversation.recipient_ids.length)
+          friend_participation.save
+          UserNotifier.new_conversation_email(@conversation, current_user, id).deliver
+        end
+        comment = @conversation.comments.build(participation_id: owner_participation.id, content: params[:comment][:content])
         comment.save
         format.html { redirect_to @conversation, notice: 'Conversation started.' }
       else
         format.html { render action: 'new' }
         unless params[:comment][:content].present?
-          @conversation.errors.add(:subject, "& first comment cannot be blank.")
+          @conversation.errors.add(:subject, '& first comment cannot be blank.')
         end
       end
     end

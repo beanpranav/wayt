@@ -4,10 +4,13 @@
 	<meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
 </head>
 <body>
-	<p>Thanks for signing up for 'what are your thoughts?', <%= @user.name %>!</p>
+	<p>Hi <%= @user.first_name %>,</p>
 	<p>
-		Have fun debating, discussing and reflecting on ideas with your close friends. 
-		<br>Welcome. See you inside :)
+		#{@friend.first_name} has accepted your friend request.
+		<br>Enjoy having in-depth conversations, discussions and debates.
+	</p>
+	<p>
+		<a href="<%= new_conversation_path %>">Start a new conversation.</a>
 	</p>
 	<p>Best,<br>Pranav Gupta</p>
 	<%= image_tag("/images/wayt_logo.png", alt: "what are your thoughts?") %>

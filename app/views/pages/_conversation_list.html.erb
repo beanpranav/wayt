@@ -6,7 +6,7 @@
 		</a>
 		<ul class="dropdown-menu">
 			<li><%= link_to "Conversations", root_path, class: "active-link" %></li>
-			<li><%= link_to "Close Friends", friends_path %></li>
+			<li><%= link_to "Close Friends", friendships_path %></li>
 		</ul>
 	</div>
 </div>
@@ -31,10 +31,7 @@
 				<h5 class="text-truncate-75"><%= c.subject %></h5>
 				
 				<div class="recipient-text text-truncate-75">
-					<%= c.owner.first_name %>
-					<% c.engaged_participations.distinct.drop(1).each do |ep| %>
-						, <%= ep.user.first_name %>
-					<% end %>
+					<%= c.engaged_participations.distinct.map { |ep| ep.user.first_name }.join(', ') %>
 					<%= "(" + c.comments.count.to_s + ")" if c.comments.count > 1 %>
 				</div>
 

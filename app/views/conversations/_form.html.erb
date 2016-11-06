@@ -18,15 +18,13 @@
         <div class="form-label-to">To:</div>
         <div class="fit-recipients" data-toggle="buttons">
           <div class="btn btn-checkbox btn-checkbox-self" disabled="disabled">Self</div>
-          <label class="btn btn-checkbox">
-            <%= check_box("recipient", "ids", {:multiple => true}, 1, nil) %> Ayush
-          </label>
-          <label class="btn btn-checkbox">
-            <%= check_box("recipient", "ids", {:multiple => true}, 2, nil) %> Pragya
-          </label>
-          <label class="btn btn-checkbox">
-            <%= check_box("recipient", "ids", {:multiple => true}, 3, nil) %> Varun
-          </label>
+            <% current_user.all_active_friendships.each do |friendship| %>
+            <% friend = friendship.get_friend(current_user) %>
+            <label class="btn btn-checkbox">
+              <%= check_box("recipient", "ids", {:multiple => true}, friend.id, nil) %>
+              <%= friend.name %>
+            </label>
+          <% end %>
         </div>
       </div>
       

@@ -13,11 +13,9 @@ $brand-font-gray:							rgba(0,0,0,0.4); //#999999;
 $brand-primary: 							#34a853; 
 $brand-secondary:							#34a853;
 // #4285f4; // #1489AC; // light blue
-// #dd4b39; // #ea4335; // red 
+// #dd4b39; // #ea4335; // red
 // #34a853; // #7cbb00; // green
-// rgba(73,12,127,.7); // #79589F // purple 
-
-$icon-gray:										#eeeeee;
+// rgba(73,12,127,.7); // #79589F // purple
 
 $navbar-height:								90px;
 $navbar-default-bg: 					white;
@@ -190,7 +188,6 @@ label { font-weight: normal; margin-bottom: 0px; }
 .alert {
   margin: 10px auto -40px;
   padding: 4px 20px;
-  /* border: 1px solid transparent; */
   border-radius: 3px;
   min-width: 300px;
   max-width: 400px;
@@ -284,6 +281,11 @@ label { font-weight: normal; margin-bottom: 0px; }
 }
 .btn-checkbox.active:hover { opacity: 1 !important; }
 
+.btn-in-list { 
+	float: right;
+	margin-right: 0;
+	margin-top: -38px;
+}
 
 // ----------- Forms --------------------------------------------------------
 .form-control { 
@@ -323,17 +325,8 @@ label { font-weight: normal; margin-bottom: 0px; }
 
 .form-format-subject { padding-left: 71px; }
 .form-format-link { padding-left: 95px; }
+.form-format-email { padding-left: 158px; }
 
-// 	.unfocus { outline: none; }
-
-// 	.form-control-writing { width: 100%;
-// 		border: 0;
-// 		padding-left: 10px;
-// 		font-style: italic;
-// 		font-weight: bold;
-// 	}
-// 	.form-control-writing:focus { outline: 0; border-left: 5px solid $brand-primary; margin-left: -5px; } 
-// 	.inline-writing { margin:-30px 40px 40px 40px; border-left: 5px solid $body-border; }
 
 
 
@@ -367,7 +360,7 @@ label { font-weight: normal; margin-bottom: 0px; }
 }
 // .dropdown-menu > li > a:hover { 
 // 	// color: $brand-font !important;
-// 	background-color: $icon-gray;
+// 	background-color: $brand-font-gray;
 // }
 
 

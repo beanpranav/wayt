@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+	<p>Hi <%= @friend.first_name %>,</p>
+	<p>
+		#{@user.first_name} enjoys the in-depth conversations and discussions you both have.
+		<br>They'd like to continue doing so even when its harder to meet in person. 
+	</p>
+	<p>
+		#{@user.first_name} has sent you a <a href="<%= friendships_path %>">friend request</a>.
+		<br>Accept it to get started!
+	</p>
+	<p>Best,<br>Pranav Gupta</p>
+	<%= image_tag("/images/wayt_logo.png", alt: "what are your thoughts?") %>
+</body>
+</html>

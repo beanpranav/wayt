@@ -15,10 +15,7 @@
     <span class="time-stamp"><%= @conversation.created_at.strftime('%b %d, %Y') %></span>
     <div class="subtitle text-truncate-75">
       <% if @conversation.participants.count > 1 %>
-        Discussion: <%= @conversation.owner.first_name %>
-        <% @conversation.participants.distinct.drop(1).each do |ep| %>
-          , <%= ep.first_name %>
-        <% end %>
+        Discussion: <%= @conversation.participants.distinct.map(&:first_name).join(', ') %>
       <% else %>
         Self Reflection
       <% end %>

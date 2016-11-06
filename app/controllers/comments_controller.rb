@@ -9,6 +9,7 @@ class CommentsController < ApplicationController
         @conversation = Conversation.find(params[:comment][:conversation_id])
         @conversation.participations.each do |part|
           part.update_attribute(:read, false) unless part.user == current_user
+          # TODO: send new comment email?
         end
         format.html { redirect_to participation_path(params[:comment][:participation_id]), notice: 'Message sent.' }
       else

@@ -1,29 +1,32 @@
 <%= form_for(@friendship) do |f| %>
   <% if @friendship.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@friendship.errors.count, "error") %> prohibited this friendship from being saved:</h2>
-
-      <ul>
+    <div id="error_explanation center">
       <% @friendship.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <%= content_tag(:div, message, class: 'alert alert-danger center') %>
       <% end %>
-      </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
+  <div class="section">
+
+    <div class="top-bar">
+      <div class="main-nav-text"><a href="<%= friendships_path %>">Find & Add Friend</a></div>
+    </div>
+
+    <div class="fit-conversation">
+      <div class="fit-form-to">
+        <%= email_field_tag :friend_email, value = nil, placeholder: "email id", class: "form-format form-format-email", :autofocus => true %>
+        <div class="form-label">Enter Friend's Email:</div>
+      </div>
+    </div>
+    
+    <%= f.hidden_field :status %>
+    <%= f.hidden_field :user_id %>
+
+    <div class="bottom-bar center fit-top-border">
+      <%= f.submit 'SEND REQUEST', class: "btn btn-primary btn-primary-action" %>
+      <%= link_to 'CANCEL', friendships_path, class: "btn btn-default btn-default-action" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :friend_id %><br>
-    <%= f.number_field :friend_id %>
-  </div>
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.text_field :status %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
 <% end %>

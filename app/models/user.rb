@@ -34,4 +34,13 @@ class User < ActiveRecord::Base
   def participations_ordered_by_comments
     Participation.where(user_id: id).includes(:comments).order('comments.created_at desc')
   end
+
+  def all_friendships
+    (friendships + inverse_friendships).sort_by(&:created_at)
+  end
+
+  def all_active_friendships
+    all_friendships = (friendships + inverse_friendships).sort_by(&:created_at)
+    all_friendships.select { |f| f.status == 'active' }
+  end
 end
