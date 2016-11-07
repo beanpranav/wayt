@@ -2,6 +2,7 @@
 class FriendshipsController < ApplicationController
   before_action :set_friendship, only: [:show, :edit, :update, :destroy, :accept]
   before_action :authenticate_involvement, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin, only: [:index]
   before_action :authenticate_user!
 
   def index

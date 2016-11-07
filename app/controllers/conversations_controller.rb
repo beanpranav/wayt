@@ -1,9 +1,11 @@
 # rubocop:disable Metrics/LineLength
 class ConversationsController < ApplicationController
   before_action :set_conversation, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin, only: [:index, :destroy]
   before_action :authenticate_owner, only: [:edit, :update, :destroy]
   before_action :authenticate_participation, only: [:show]
   before_action :authenticate_user!
+
 
   def index
     @conversations = Conversation.all

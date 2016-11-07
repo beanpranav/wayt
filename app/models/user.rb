@@ -36,11 +36,11 @@ class User < ActiveRecord::Base
   end
 
   def all_friendships
-    (friendships + inverse_friendships).sort_by(&:created_at)
+    (friendships + inverse_friendships).sort_by(&:updated_at)
   end
 
   def all_active_friendships
-    all_friendships = (friendships + inverse_friendships).sort_by(&:created_at)
+    all_friendships = (friendships + inverse_friendships).sort_by(&:updated_at)
     all_friendships.select { |f| f.status == 'active' }
   end
 end

@@ -12,11 +12,21 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
+  helper_method :authenticate_admin
+
   protected
 
   # for allowing :name as a strong parameter while signup and account update.
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << :name
     devise_parameter_sanitizer.for(:account_update) << :name
+  end
+
+  def authenticate_admin
+    if current_user.email == 'bean.pranav@gmail.com'
+      true
+    else
+      redirect_to root_path, notice: "You don't have permission to view this page."
+    end
   end
 end

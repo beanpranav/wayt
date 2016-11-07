@@ -13,12 +13,12 @@ class ParticipationsController < ApplicationController
 
   def mark_as_unread
     @participation.update_attribute(:read, false)
-    redirect_to root_path
+    redirect_to root_path, notice: 'Marked as unread.'
   end
 
   def mark_as_read
     @participation.update_attribute(:read, true)
-    redirect_to root_path
+    redirect_to root_path, notice: 'Marked as read.'
   end
 
   private
