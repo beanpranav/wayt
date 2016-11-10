@@ -20,5 +20,5 @@ Rails.application.routes.draw do
                      controllers: { registrations: 'registrations' }
 
   root 'pages#home'
-  get 'friends' => 'pages#friends'
+  get 'about' => 'pages#about'
 end

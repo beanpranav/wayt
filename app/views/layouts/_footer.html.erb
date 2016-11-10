@@ -1,1 +1,9 @@
-<div class="footer"></div>
+<% if request.path != '/sign_up' && request.path != '/login' && controller_name != "passwords" %>
+
+	<div class="footer">
+		<div class="container">
+			<%= link_to 'ABOUT US', about_path, class: 'btn btn-link' %>
+		</div>
+	</div>
+
+<% end %>
