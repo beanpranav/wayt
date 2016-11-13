@@ -81,7 +81,6 @@
     <%= f.hidden_field :conversation_id, value: @conversation.id %>
 
     <div class="page-content">
-      <span class="time-stamp">now</span>
       <h5><%= current_user.name %></h5>
       <%= f.trix_editor :content, placeholder: 'what are your thoughts?' %>
     </div>

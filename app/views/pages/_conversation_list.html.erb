@@ -31,7 +31,11 @@
 				<h5 class="text-truncate-75"><%= c.subject %></h5>
 				
 				<div class="recipient-text text-truncate-75">
-					<%= c.engaged_participations.distinct.map { |ep| ep.user.first_name }.join(', ') %>
+					<% if c.participants.count > 1 %>
+					  Discussion: <%= c.engaged_participations.distinct.map { |ep| ep.user.first_name }.join(', ') %>
+					<% else %>
+					  Self Reflection
+					<% end %>
 					<%= "(" + c.comments.count.to_s + ")" if c.comments.count > 1 %>
 				</div>
 

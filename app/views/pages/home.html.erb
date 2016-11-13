@@ -1,25 +1,58 @@
-<div class="section">
-	<% if user_signed_in? %>
+<% if user_signed_in? %>
+	<div class="section">
 		<%= render 'conversation_list' %>
-	<% else %>
+	</div>
+<% else %>
 
-	<div class="page-content center">
-		<h1>Have fun discussing, debating, and reflecting on ideas you care about with close friends.</h1>
+	<div class="section">
+		<div class="page-content center">
+			<h1>Have fun discussing, debating, and reflecting on ideas you care about with close friends.</h1>
 
-		<div id="carousel-home" class="carousel slide carousel-fade" data-ride="carousel">
-			<div class="carousel-inner" role="listbox">
-				<!-- image credit: illustrators at 16 personalities -->
-				<div class="item active"><img src="/images/h_friendship.png" alt="friendship"></div>
-				<div class="item"><img src="/images/h_relationship.png" alt="relationship"></div>
-				<div class="item"><img src="/images/h_reflection.png" alt="reflection"></div>
+			<div id="carousel-home" class="carousel slide carousel-fade" data-ride="carousel">
+				<div class="carousel-inner" role="listbox">
+					<!-- image credit: illustrators at 16 personalities -->
+					<div class="item active"><img src="/images/h_friendship.png" alt="friendship"></div>
+					<div class="item"><img src="/images/h_relationship.png" alt="relationship"></div>
+					<div class="item"><img src="/images/h_reflection.png" alt="reflection"></div>
+				</div>
 			</div>
+			<%= link_to "GET STARTED", new_user_registration_path, class: "btn btn-primary btn-primary-action" %>
 		</div>
 
-		<p><%= link_to "GET STARTED", new_user_registration_path, class: "btn btn-primary btn-primary-action" %></p>
+		<div class="page-content fit-top-border">
+			<h5>About</h5>
+	
+			<p>
+				A couple of my really close friends and I enjoy having in-depth conversations about random topics. Topics we find interesting. Topics we'd like to get each others views on. 
+			</p>
+			<p>
+				While we were in college, this happened in person. Since then, life has happened to us. We live in different cities now. We keep up with each other but our discussions are lost. We found ourselves sharing links in our whatsapp group or sending email and essentially asking 'what are you thoughts?'.
+			</p>
+			<p>
+				That is why I've built this. This is where we have conversations at our own time, without them getting buried under tons of work email or day-to-day chatter.
+			</p>
+			<p>
+				My name is Pranav Gupta and I'm a PhD student at CMU. My research involves studying how people make decisions when working in teams and what makes some teams smarter than others.
+			</p>
+		</div>
+
+		<div class="page-content fit-top-border">
+			<h5>Stop with all the selling business. This is not a startup. Go away.</h5>
+
+			<p>
+				A bunch of people have asked me: what is the value proposition of this product? What is the problem that you are solving? Why should I be using this? Well, the answer is simple. This is not solving any of your burning problem. There is no value addition. I'm not selling anything. 
+			</p>
+			<p>
+				If you aren't my friend, I'll probably not bother you beyond a welcome email. I enjoy my private conversations. You can do the same if you so choose to. 
+			</p>
+			<p>
+				Discussions with friends are fun. And that is all there is to it. If you find someone who attempts to say that you should have fun because it is good for you - Run! Run as far away as you can from that person! This person is what we'd call a classic adult, someone who used to be a child but that is gone now. Or worse, this person could be a entrepreneur. And in that case, all the best. You are on your own.
+			</p>
+		</div>
 	</div>
 
-	<% end %>
-</div>
+<% end %>
+
 
 <script type="text/javascript">
 	$('.carousel').carousel();

@@ -71,7 +71,7 @@ h4 {
 }
 p, h5, .subtitle { 
 	font-size: 1.5rem;
-	margin: 0 0 1.5em 0;
+	margin: 1.5em 0;
 	line-height: 1.65em;
 	word-spacing: 0.04em;
 	color: $brand-font;
@@ -235,7 +235,7 @@ label { font-weight: normal; margin-bottom: 0px; }
 	opacity: 1; 
 }
 .btn-default {
-	border: 0;
+	// border: 0;
 	padding: 7px 16px;
 	border: solid 1px $body-border;
 	color: $brand-font-gray;
@@ -267,7 +267,11 @@ label { font-weight: normal; margin-bottom: 0px; }
 	-webkit-transition: color .2s ease-in-out;
 }
 .btn-link:hover { color: $brand-font; text-decoration: none; }
-
+.btn-icon {
+	padding: 2px 3px;
+	font-size: 1.3em;
+	color: $brand-font-gray;
+}
 
 .btn-checkbox {
 	font-weight: bold;
@@ -393,14 +397,48 @@ label { font-weight: normal; margin-bottom: 0px; }
 
 // ----------- Trix edits --------------------------------------------------------
 
-trix-toolbar { display: none; }
-// trix-toolbar .button_groups {
-// 	// float: right;
-//   button.bold, button.italic, button.strike, button.link,
-//   span.block_tools, span.history_tools {
-//     display: none;
-//   }
-// }
+// trix-toolbar { display: none; }
+trix-toolbar .button_groups {
+	span.text_tools {
+		float: right;
+		margin: -27px 0px 0 0;
+		border: 0;
+	}
+	button.link::before { background-size: 15px; }
+	button {
+    height: 29px;
+    width: 31px;
+		border-radius: 16px;
+		border: solid 1px $body-border;
+		opacity: 0.9; 
+		transition: opacity .2s ease-in-out;
+		-webkit-transition: opacity .2s ease-in-out;
+	}
+	button:hover, button:active, button.active, button:focus { 
+		opacity: 1;
+		border-color: $brand-font-gray; 
+	}
+	button.active { background: $body-bg; }
+  button.bold, button.italic, button.strike,
+  span.block_tools, span.history_tools {
+    display: none;
+  }
+}
+trix-toolbar .button_group {
+	margin: 0; 
+	border-color: #bbb;
+	input[type=button] { border: 0; }
+}
+trix-toolbar .dialogs .dialog {
+	border: 0;
+	border-radius: 3px;
+	box-shadow: none;
+	top: -25px;
+	left: inherit;
+	right: 31px;
+	padding: 0px;
+	.link_dialog { min-width: 281px; }
+}
 
 trix-editor {
 	font-size: 1.5rem;
