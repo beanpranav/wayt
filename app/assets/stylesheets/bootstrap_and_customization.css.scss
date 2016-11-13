@@ -197,7 +197,7 @@ label { font-weight: normal; margin-bottom: 0px; }
   margin: 10px auto -40px;
   padding: 4px 20px;
   border-radius: 3px;
-  max-width: 500px;
+  // max-width: 500px;
   text-align: center;
   position: relative;
   top: 0px;
@@ -342,7 +342,7 @@ label { font-weight: normal; margin-bottom: 0px; }
 
 
 // ----------- Dropdowns ------------------------------------------------------------
-.navbar-default .navbar-nav > li > a { color: $brand-primary; }
+.navbar-default .navbar-nav > li > a { color: $brand-font-gray; }
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
 	color: $brand-font;
 }
@@ -407,7 +407,7 @@ trix-toolbar .button_groups {
 	button.link::before { background-size: 15px; }
 	button {
     height: 29px;
-    width: 31px;
+    width: 29px;
 		border-radius: 16px;
 		border: solid 1px $body-border;
 		opacity: 0.9; 
@@ -435,9 +435,9 @@ trix-toolbar .dialogs .dialog {
 	box-shadow: none;
 	top: -25px;
 	left: inherit;
-	right: 31px;
+	right: 29px;
 	padding: 0px;
-	.link_dialog { min-width: 281px; }
+	.link_dialog { min-width: 281px; max-width: 100%; }
 }
 
 trix-editor {
@@ -458,7 +458,7 @@ trix-editor {
 // ----------- Media fit --------------------------------------------------------
 @media (max-width: 700px) {
 	.container { width: 100% }
-	.section {
+	.section, .section-wayt {
 		margin-top: 10px;
 		margin-bottom: 10px;
 		border: 0px;
@@ -466,7 +466,6 @@ trix-editor {
 		border-top: solid 1px $body-border;
 		border-bottom: solid 1px $body-border; 
 	}
-	.section-wayt { margin-top: 10px; }
 	.section-userform, .section-user-setting {
 		width: 300px;
 		margin: 20px auto;
@@ -476,6 +475,7 @@ trix-editor {
 	.page-content, .fit-comment { padding: 20px 20px; }
 	.fit-comment-content { padding: 0px 20px 10px 20px; }
 	.fit-comfort { padding: 20px 20px; }
+	trix-toolbar .dialogs .dialog.link_dialog { min-width: 89%; left: 0px; }
 	.btn-primary-action, .btn-secondary-action, .btn-default-action { min-width: 100px; }
 	.text-truncate-75, .text-truncate-preview { width: 70%; } 
 }

@@ -4,8 +4,13 @@
     <%= link_to "COMPOSE", new_conversation_path, class: "pull-right btn btn-secondary btn-secondary-action" %>
     <div class="main-nav-text">
       <a href="<%= root_path %>">
-        Conversation
-        <%= "(#{current_user.participations.unread.count})" if current_user.participations.unread.count > 0 %>
+        <div class="hidden-xs">
+          <i class="fa fa-fw fa-lg fa-chevron-left"></i> Conversations
+          <%= "(#{current_user.participations.unread.count})" if current_user.participations.unread.count > 0 %>
+        </div>
+        <div class="visible-xs">
+          <i class="fa fa-lg fa-chevron-left"></i>
+        </div>
       </a>
     </div>
   </div>
