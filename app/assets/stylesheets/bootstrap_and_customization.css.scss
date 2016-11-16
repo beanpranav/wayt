@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600');
-@import url('https://fonts.googleapis.com/css?family=Lato:700');
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
 
 $font-family-sans-serif: 			'Open Sans', Arial, sans-serif;
 $font-family-headers: 				'Lato', Arial, sans-serif;
@@ -13,7 +13,7 @@ $brand-font-gray:							rgba(0,0,0,0.4); //#999999;
 $brand-primary: 							#52af89; 
 $brand-secondary:							#52af89;
 // #4285f4; // #1489AC; // blue
-// #dd4b39; // red
+$brand-red:									  #dd4b39; // red
 // #52af89; // #34a853; // green
 
 $navbar-height:								90px;
@@ -217,7 +217,7 @@ label { font-weight: normal; margin-bottom: 0px; }
 }
 .btn-block { margin: 0px !important; }
 
-.btn-primary, .btn-secondary { 
+.btn-primary, { 
 	opacity: 0.9; 
 	border: 0;
 	color: white;
@@ -228,14 +228,8 @@ label { font-weight: normal; margin-bottom: 0px; }
 	background-color: $brand-primary;
 	opacity: 1; 
 }
-.btn-secondary { background-color: $brand-secondary; }
-.btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active, .btn-secondary.active { 
-	background-color: $brand-secondary; 
-	color: white;
-	opacity: 1; 
-}
+
 .btn-default {
-	// border: 0;
 	padding: 7px 16px;
 	border: solid 1px $body-border;
 	color: $brand-font-gray;
@@ -249,11 +243,13 @@ label { font-weight: normal; margin-bottom: 0px; }
 	border-color: $brand-font-gray;
 	opacity: 1;
 }
-.btn-primary-action, .btn-secondary-action, .btn-default-action {
+
+.btn-primary-action, .btn-default-action {
 	border-radius: 16px;
 	font-weight: bold;
 	letter-spacing: 0.03em;
 	min-width: 150px;
+	text-align: center;
 }
 
 .btn-link { 
@@ -267,11 +263,31 @@ label { font-weight: normal; margin-bottom: 0px; }
 	-webkit-transition: color .2s ease-in-out;
 }
 .btn-link:hover { color: $brand-font; text-decoration: none; }
-.btn-icon {
-	padding: 2px 3px;
-	font-size: 1.3em;
-	color: $brand-font-gray;
+
+.btn-read-icon {
+	border-radius: 16px;
+  padding: 7.5px 7px 6.5px 7.5px;
+	font-size: 1.25em;
+	line-height: 0;
 }
+.btn-more-icon {
+	border-radius: 16px;
+  padding: 7px 9px 5px;
+	font-size: 1.25em;
+	line-height: 0;
+	border: solid 1px $body-border;
+	color: $brand-font-gray;
+	opacity: 0.9; 
+	transition: opacity .2s ease-in-out;
+	-webkit-transition: opacity .2s ease-in-out;
+}
+.btn-important-icon {
+	border-radius: 16px;
+  padding: 7.5px 6.5px 6.5px 7px;
+	font-size: 1.25em;
+	line-height: 0;
+}
+
 
 .btn-checkbox {
 	font-weight: bold;
@@ -326,7 +342,6 @@ label { font-weight: normal; margin-bottom: 0px; }
 	font-size: 1.6rem;
 	width: 100%;
 	border: 0px;
-	
 }
 .form-format::-webkit-input-placeholder {
    font-weight: lighter !important;
@@ -337,7 +352,7 @@ label { font-weight: normal; margin-bottom: 0px; }
 .form-format-subject { padding-left: 71px; }
 .form-format-link { padding-left: 95px; }
 .form-format-email { padding-left: 158px; }
-
+input[disabled] { color: $brand-primary; cursor: not-allowed !important; }
 
 
 
@@ -364,17 +379,31 @@ label { font-weight: normal; margin-bottom: 0px; }
 	text-align: left;
 }
 .dropdown-menu > li > a {
-	padding: 5px 25px; 
+	padding: 5px 20px; 
 }
 .dropdown-menu .divider { margin: 5px 0; background-color: $body-border; }
 .active-link { 
 	color: $brand-secondary !important;
 	font-weight: bolder !important; 
 }
+.delete-link { color: $brand-red !important; }
 // .dropdown-menu > li > a:hover { 
 // 	// color: $brand-font !important;
 // 	background-color: $brand-font-gray;
 // }
+.left-dropdown {
+	margin-left: -20px;
+  margin-top: 20px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.right-dropdown {
+	right: auto !important;
+  margin-left: -75px;
+  margin-top: 15px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
 
 .carousel-fade {
 	padding: 30px 0 35px;
@@ -473,10 +502,11 @@ trix-editor {
 	.footer { margin-bottom: 10px; }
 	.alert { margin: -1px -2px -11px; }
 	.page-content, .fit-comment { padding: 20px 20px; }
+	.fit-conversation { padding: 12px 20px 10px; }
 	.fit-comment-content { padding: 0px 20px 10px 20px; }
 	.fit-comfort { padding: 20px 20px; }
 	trix-toolbar .dialogs .dialog.link_dialog { min-width: 89%; left: 0px; }
-	.btn-primary-action, .btn-secondary-action, .btn-default-action { min-width: 100px; }
+	.btn-primary-action, .btn-default-action { min-width: 100px; }
 	.text-truncate-75, .text-truncate-preview { width: 70%; } 
 }
 

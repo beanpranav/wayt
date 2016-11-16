@@ -1,10 +1,10 @@
 <div class="top-bar">
-	<%= link_to "COMPOSE", new_conversation_path, class: "pull-right btn btn-secondary btn-secondary-action" %>
+	<%= link_to "COMPOSE", new_conversation_path, class: "pull-right btn btn-primary btn-primary-action" %>
 	<div class="main-nav-text">
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 			Conversations <%= "(#{@participations.unread.count})" if @participations.unread.count > 0 %>
 		</a>
-		<ul class="dropdown-menu">
+		<ul class="dropdown-menu left-dropdown">
 			<li><%= link_to "Conversations", root_path, class: "active-link" %></li>
 			<li><%= link_to "Close Friends", friendships_path %></li>
 		</ul>
@@ -34,7 +34,7 @@
 					<% if c.participants.count > 1 %>
 					  Discussion: <%= c.engaged_participations.distinct.map { |ep| ep.user.first_name }.join(', ') %>
 					<% else %>
-					  Self Reflection
+					  Reflection
 					<% end %>
 					<%= "(" + c.comments.count.to_s + ")" if c.comments.count > 1 %>
 				</div>

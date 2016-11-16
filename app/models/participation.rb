@@ -16,4 +16,8 @@ class Participation < ActiveRecord::Base
   def important?
     important
   end
+
+  def unmute?
+    !mute
+  end
 end

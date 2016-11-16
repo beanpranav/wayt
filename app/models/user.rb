@@ -31,6 +31,18 @@ class User < ActiveRecord::Base
   #   end
   # end
 
+  def friendship_notifications?
+    notification_friendship
+  end
+
+  def conversation_notifications?
+    notification_conversation
+  end
+
+  def reply_notifications?
+    notification_comment
+  end
+
   def participations_ordered_by_comments
     Participation.where(user_id: id).includes(:comments).order('comments.created_at desc')
   end

@@ -3,22 +3,24 @@
   <nav class="navbar navbar-default navbar-static-top header-set" role="navigation">
     <div class="container">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
+        
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-collapse" 
+          style="display: <%= 'none;' unless user_signed_in? %>">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
 
         <%= link_to image_tag("/images/wayt_logo.png",
         alt: "what are your thoughts?"), root_path, class: "navbar-brand hidden-xs" %>
         <%= link_to image_tag("/images/wayt_logo.png", alt: "what are your thoughts?",
         height: 40), root_path, class: "navbar-brand visible-xs" %>
     </div>
-
-    <div class="collapse navbar-collapse" id="nav-collapse">
-      <ul class="nav navbar-nav navbar-right center">
         
           <% if user_signed_in? %>
+    <div class="collapse navbar-collapse" id="nav-collapse">
+      <ul class="nav navbar-nav navbar-right center">
+
               <li class="dropdown hidden-xs">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <%= current_user.first_name %><i class="fa fa-caret-down fa-fw"></i> 
@@ -27,7 +29,7 @@
                   <li><a href="<%= root_path %>" class="<%= 'active-link' if current_page?(root_path) %>">Conversations</a></li>
                   <li><a href="<%= friendships_path %>" class="<%= 'active-link' if current_page?(friendships_path) %>">Close Friends</a></li>
                   <li class="divider"></li>
-                  <li><a href="<%= edit_user_registration_path %>" class="<%= 'active-link' if current_page?(edit_user_registration_path) %>">My Account</a></li>
+                  <li><a href="<%= edit_user_registration_path %>" class="<%= 'active-link' if current_page?(edit_user_registration_path) || current_page?(notification_settings_path) %>">Settings</a></li>
                   <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
                 </ul>
               </li>
@@ -36,14 +38,12 @@
               <li><a href="<%= root_path %>" class="visible-xs <%= 'active-link' if current_page?(root_path) %>">Conversations</a></li>
               <li><a href="<%= friendships_path %>" class="visible-xs <%= 'active-link' if current_page?(friendships_path) %>">Close Friends</a></li>
               <li class="divider visible-xs"></li>
-              <li><a href="<%= edit_user_registration_path %>" class="visible-xs <%= 'active-link' if current_page?(edit_user_registration_path) %>">My Account</a></li>
+              <li><a href="<%= edit_user_registration_path %>" class="visible-xs <%= 'active-link' if current_page?(edit_user_registration_path) %>">Settings</a></li>
               <li><%= link_to "Log Out", destroy_user_session_path, class: "visible-xs", method: :delete %></li>
 
-          <% else %>
-            <li ><%= link_to "Log In", new_user_session_path %></li>
-          <% end %>
       </ul>
     </div>
+          <% end %>
   </nav>
 
 <% end %>

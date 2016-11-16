@@ -1,15 +1,16 @@
 # rubocop:disable Metrics/LineLength
 class CommentsController < ApplicationController
   def create
-    # raise params
     @comment = Comment.new(comment_params)
 
     respond_to do |format|
       if @comment.save
         @conversation = Conversation.find(params[:comment][:conversation_id])
         @conversation.participations.each do |part|
-          part.update_attribute(:read, false) unless part.user == current_user
-          # TODO: send new comment email?
+          unless part.user == current_user
+            part.update_attribute(:read, false)
+            UserNotifier.new_comment_email(@conversation, current_user, part.user).deliver if part.user.reply_notifications? && part.unmute?
+          end
         end
         format.html { redirect_to participation_path(params[:comment][:participation_id]), notice: 'Message sent.' }
       else

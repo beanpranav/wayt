@@ -1,19 +1,19 @@
-<div class="section-userform">
-	<div class="fit-comfort">
-		<%= link_to image_tag("/images/wayt_logo.png", alt: "what are your thoughts?"), root_path %>
-	</div>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+	<%= devise_error_messages!.html_safe %>
+	<div class="section-userform">
+		<div class="fit-comfort">
+			<%= link_to image_tag("/images/wayt_logo.png", alt: "what are your thoughts?"), root_path %>
+		</div>
 
-	<div class="fit-comfort fit-top-border">
-		<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+		<div class="fit-comfort fit-top-border">
 			<h4>Have fun discussing, debating, and reflecting on ideas with close friends</h4>
-			<p><%= devise_error_messages!.html_safe %></p>
 			<p><%= f.text_field :name, placeholder: "full name", class: "form-control center", :autofocus => true %></p>
 			<p><%= f.email_field :email, placeholder: "email", class: "form-control center" %></p>
 			<p><%= f.password_field :password, placeholder: "password", class: "form-control center" %></p>
 			<p><%= f.password_field :password_confirmation, placeholder: "re-type password", class: "form-control center" %></p>
 			<p><%= f.submit "SIGN UP", class: "btn btn-block btn-primary btn-primary-action" %></p>
-		<% end %>
-	</div>
+		</div>
 
-	<%= render "devise/shared/links" %>
-</div>
+		<%= render "devise/shared/links" %>
+	</div>
+<% end %>

@@ -6,11 +6,11 @@
 <body>
 	<p>Hi <%= @friend.first_name %>,</p>
 	<p>
-		<%= @user.first_name %> started a new discussion - <%= @conversation.subject %>
+		<%= @user.first_name %> wrote a reply to your mutual discussion.
 		<br>They would love to get your inputs.
 	</p>
 	<p>
-		Read the discussion <a href="<%= conversation_url(@conversation) %>">here</a>.
+		Read and reply here: <a href="<%= conversation_url(@conversation) %>"><%= @conversation.subject %></a>.
 	</p>
 	<p>
 		Best,

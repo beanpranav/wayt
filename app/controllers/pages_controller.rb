@@ -6,6 +6,6 @@ class PagesController < ApplicationController
     end
   end
 
-  def about
+  def notification_settings
   end
 end

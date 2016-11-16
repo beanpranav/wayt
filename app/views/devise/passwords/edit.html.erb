@@ -1,17 +1,18 @@
-<div class="section-user-setting">
-	<div class="fit-comfort">
-		<h3>Change Password</h3>
-	</div>
+<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
+	<%= devise_error_messages! %>
+ 	<div class="section-userform">
+		<div class="fit-comfort">
+			<%= link_to image_tag("/images/wayt_logo.png", alt: "what are your thoughts?"), root_path %>
+		</div>
 
-	<div class="fit-comfort fit-top-border">
-		<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
-			<p><%= devise_error_messages! %></p>
-  		<%= f.hidden_field :reset_password_token %>
+		<div class="fit-comfort fit-top-border">
+			<h4>Change Password</h4>
+			<%= f.hidden_field :reset_password_token %>
 			<p><%= f.password_field :password, placeholder: "new password", class: "form-control center" %></p>
 			<p><%= f.password_field :password_confirmation, placeholder: "re-type new password", class: "form-control center" %></p>
 			<p><%= f.submit "SAVE CHANGES", class: "btn btn-block btn-primary btn-primary-action" %></p>
-		<% end %>
-	</div>
+		</div>
 
-	<%= render "devise/shared/links" %>
-</div>
+		<%= render "devise/shared/links" %>
+	</div>
+<% end %>

@@ -35,7 +35,7 @@ class ConversationsController < ApplicationController
         @conversation.recipient_ids.each do |id|
           friend_participation = @conversation.participations.build(user_id: id, others_count: @conversation.recipient_ids.length)
           friend_participation.save
-          UserNotifier.new_conversation_email(@conversation, current_user, id).deliver
+          UserNotifier.new_conversation_email(@conversation, current_user, id).deliver if friend_participation.user.conversation_notifications?
         end
         comment = @conversation.comments.build(participation_id: owner_participation.id, content: params[:comment][:content])
         comment.save
@@ -62,7 +62,7 @@ class ConversationsController < ApplicationController
   def destroy
     @conversation.destroy
     respond_to do |format|
-      format.html { redirect_to conversations_url }
+      format.html { redirect_to root_path, notice: 'Conversation deleted.' }
     end
   end
 

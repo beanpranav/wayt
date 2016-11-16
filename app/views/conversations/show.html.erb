@@ -1,7 +1,28 @@
 <div class="section">
 
   <div class="top-bar">
-    <%= link_to "COMPOSE", new_conversation_path, class: "pull-right btn btn-secondary btn-secondary-action" %>
+    
+    <div class="pull-right">
+      <%= link_to '<i class="fa fa-envelope-o"></i>'.html_safe, mark_as_unread_participation_path(@participation), method: :post, class: "btn btn-primary btn-read-icon" %>
+
+      <a href="#" class="dropdown-toggle btn btn-more-icon" data-toggle="dropdown">
+          <i class="fa fa-angle-down"></i>
+      </a>
+      <ul class="dropdown-menu right-dropdown">
+        <% if @conversation.participants.count > 1 %>
+          <% if @participation.unmute? %>
+            <li><%= link_to "Mute Discussion", mute_participation_path(@participation), method: :post %></li>      
+          <% else %>
+            <li><%= link_to "Umute Discussion", unmute_participation_path(@participation), method: :post %></li>
+          <% end %>
+        <% end %>
+
+        <% if @conversation.owner == current_user %>
+          <li><%= link_to "Delete", @conversation, method: :delete, data: { confirm: 'Are you sure?' }, class: "delete-link" %></li>
+        <% end %>
+      </ul>
+    </div>
+
     <div class="main-nav-text">
       <a href="<%= root_path %>">
         <div class="hidden-xs">
@@ -22,7 +43,7 @@
       <% if @conversation.participants.count > 1 %>
         Discussion: <%= @conversation.participants.distinct.map(&:first_name).join(', ') %>
       <% else %>
-        Self Reflection
+        Reflection
       <% end %>
       <%= "(" + @comments.count.to_s + ")" if @comments.count > 1 %>
     </div>

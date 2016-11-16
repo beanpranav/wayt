@@ -1,22 +1,42 @@
-<div class="section-user-setting">
-  <div class="fit-comfort">
-    <h3>My Account Settings</h3>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= devise_error_messages!.html_safe %>
+  <div class="section">
+    <div class="top-bar">
+      <div class="main-nav-text">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          Basic Information <i class="fa fa-caret-down fa-fw"></i> 
+        </a>
+        <ul class="dropdown-menu">
+          <li><%= link_to "Basic Information", edit_user_registration_path, class: "active-link" %></li>
+          <li><%= link_to "Email Notifications", notification_settings_path %></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="fit-conversation">
+      <div class="fit-form">
+        <%= f.text_field :name, placeholder: "full name", class: "form-format form-format-link" %>
+        <span class="form-label">Full Name:</span>
+      </div>
+      <div class="fit-form">
+        <%= f.email_field :email, placeholder: "email", disabled: "disabled", class: "form-format form-format-link" %>
+        <span class="form-label">Email:</span>
+      </div>
+      <div class="fit-form">
+        <%= f.password_field :current_password, placeholder: "current (required)", class: "form-format form-format-link", autofocus: true %>
+        <span class="form-label">Password:</span>
+      </div>
+      <div class="fit-form">
+        <%= f.password_field :password, placeholder: "new (optional)", :autocomplete => "off", class: "form-format form-format-link" %>
+      </div>
+      <div class="fit-form">
+        <%= f.password_field :password_confirmation, placeholder: "re-type new", class: "form-format form-format-link" %>
+      </div>
+    </div>
+
+    <div class="bottom-bar center fit-top-border">
+      <%= f.submit "SAVE CHANGES", class: "btn btn-primary btn-primary-action" %>
+    </div>
+
   </div>
-  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-    <div class="fit-comfort fit-top-border">
-      <p><%= devise_error_messages!.html_safe %></p>
-      <p><%= f.text_field :name, placeholder: "full name", class: "form-control center" %></p>
-      <p><%= f.email_field :email, placeholder: "email", disabled: "disabled", class: "form-control center" %></p>
-    </div>
-    <div class="fit-comfort fit-top-border">
-    <h4>change password?</h4>
-      <p><%= f.password_field :password, placeholder: "new password", class: "form-control center", :autocomplete => "off" %></p>
-      <p><%= f.password_field :password_confirmation, placeholder: "re-type new password", class: "form-control center" %></p>
-    </div>
-    <div class="fit-comfort fit-top-border">
-      <p></p>
-      <p><%= f.password_field :current_password, placeholder: "current password (required)", class: "form-control center" %></p>
-      <p><%= f.submit "SAVE CHANGES", class: "btn btn-block btn-primary btn-primary-action" %></p>
-    </div>
-  <% end %>
-</div>
+<% end %>

@@ -59,7 +59,7 @@ class FriendshipsController < ApplicationController
 
         respond_to do |format|
           if @friendship.save
-            UserNotifier.send_friend_request_email(@friendship.user, @friendship.friend).deliver
+            UserNotifier.friend_request_send_email(@friendship.user, @friendship.friend).deliver if @friendship.friend.friendship_notifications?
             format.html { redirect_to friendships_path, notice: 'Friend request sent.' }
           else
             format.html { render action: 'new' }
@@ -90,7 +90,7 @@ class FriendshipsController < ApplicationController
 
   def accept
     @friendship.update_attribute(:status, 'active')
-    UserNotifier.accept_friend_request_email(@friendship.user, @friendship.friend).deliver
+    UserNotifier.friend_request_accept_email(@friendship.user, @friendship.friend).deliver if @friendship.user.friendship_notifications?
     redirect_to friendships_path, notice: 'Friend request accepted. You can now have discussions with them.'
   end
 

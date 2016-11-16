@@ -1,24 +1,23 @@
 # rubocop:disable Metrics/LineLength
 class UserNotifier < ActionMailer::Base
-  default from: 'pranav@whatareyourthoughts.org'
+  default from: '"What are your thoughts?" <notification@whatareyourthoughts.org>'
 
   # WELCOME EMAIL
-  def send_signup_email(user)
+  def welcome_email(user)
     @user = user
     mail(to: @user.email,
          subject: "[What are your thoughts?] Welcome, #{@user.first_name}!")
   end
 
-
   # FRIEND REQUESTS: SEND & ACCEPT
-  def send_friend_request_email(user, friend)
+  def friend_request_send_email(user, friend)
     @user = user
     @friend = friend
     mail(to: @friend.email,
          subject: "[What are your thoughts?] #{@user.first_name} has sent you a friend request!")
   end
 
-  def accept_friend_request_email(user, friend)
+  def friend_request_accept_email(user, friend)
     @user = user
     @friend = friend
     mail(to: @user.email,
@@ -31,20 +30,22 @@ class UserNotifier < ActionMailer::Base
     @friend = User.find(recipient_id)
     @conversation = conversation
     mail(to: @friend.email,
-         subject: "[What are your thoughts?] #{@user.first_name} started a discussion - #{@conversation.subject}")
+         subject: "[#{@user.first_name} started a discussion] #{@conversation.subject}")
   end
 
-  # # SEND NEW USER INVITE
-  # def new_user_invite(invite, signup_url)
-  #   @invite = invite
-  #   @signup_url = signup_url
-  #   mail(to: @invite.recipient_email,
-  #        subject: "[What are your thoughts?] #{@invite.sender.first_name} personally has invited you!")
-  # end
+  # NEW COMMENT
+  def new_comment_email(conversation, sender, recipient)
+    @user = sender
+    @friend = recipient
+    @conversation = conversation
+    mail(to: @friend.email,
+         subject: "[#{@user.first_name} wrote a reply] #{@conversation.subject}")
+  end
 
-  # def new_user_invite_copy(invite)
-  #   @invite = invite
-  #   mail(to: @invite.sender.email,
-  #        subject: "[What are your thoughts?] #{@invite.sender.first_name} personally has invited you!")
-  # end
+  # ADMIN EMAILS: NEW USER
+  def admin_new_user_email(user)
+    @user = user
+    mail(to: admin_email,
+         subject: "[WAYT? New User] #{@user.name} just signed up!")
+  end
 end
