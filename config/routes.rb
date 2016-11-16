@@ -7,7 +7,11 @@ Rails.application.routes.draw do
   end
 
   resources :comments
-  resources :conversations
+  resources :conversations do
+    member do
+      post :add_participant
+    end
+  end
 
   resources :participations do
     member do

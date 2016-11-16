@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+	<p>Hi <%= @friend.first_name %>,</p>
+	<p>
+		<%= @user.first_name %> invited you to contribute to their discussion - <%= @conversation.subject %>
+		<br>They would love to get your inputs.
+	</p>
+	<p>
+		Read the discussion <a href="<%= conversation_url(@conversation) %>">here</a>.
+	</p>
+	<p>
+		Best,
+		<br>Pranav
+		<br><a href="root_url">what are your thoughts?</a>
+	</p>
+</body>
+</html>

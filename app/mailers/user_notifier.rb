@@ -33,6 +33,15 @@ class UserNotifier < ActionMailer::Base
          subject: "[#{@user.first_name} started a discussion] #{@conversation.subject}")
   end
 
+  # NEW PARTICIPANT
+  def new_participant_email(conversation, sender, recipient_id)
+    @user = sender
+    @friend = User.find(recipient_id)
+    @conversation = conversation
+    mail(to: @friend.email,
+         subject: "[#{@user.first_name} invited you to a discussion] #{@conversation.subject}")
+  end
+
   # NEW COMMENT
   def new_comment_email(conversation, sender, recipient)
     @user = sender

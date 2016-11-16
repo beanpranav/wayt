@@ -44,13 +44,13 @@ class FriendshipsController < ApplicationController
       elsif current_user.friendships.any? { |p| p.friend_id == friend.id } || current_user.inverse_friendships.any? { |p| p.user_id == friend.id }
         # existing friend
         respond_to do |format|
-          format.html { redirect_to new_friendship_path, notice: "<b>#{friend.name}</b> is already a friend!".html_safe }
+          format.html { redirect_to new_friendship_path, notice: "<b>#{friend.first_name}</b> is already a friend!".html_safe }
         end
 
       elsif friend.friendships.count + friend.inverse_friendships.count == 5 # TODO: update
         # friend has full network
         respond_to do |format|
-          format.html { redirect_to new_friendship_path, notice: "<b>#{friend.name}</b> already has maximum number of allowable friends!<br>Please ask them to make space before trying again".html_safe }
+          format.html { redirect_to new_friendship_path, notice: "<b>#{friend.first_name}</b> already has maximum number of allowable friends!<br>Please ask them to make space before trying again".html_safe }
         end
 
       else

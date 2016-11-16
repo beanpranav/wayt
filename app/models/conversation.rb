@@ -21,4 +21,8 @@ class Conversation < ActiveRecord::Base
   def my_participation(current_user_id)
     Participation.find_by(user_id: current_user_id, conversation_id: id)
   end
+
+  def unique_participants
+    participants.distinct.map(&:first_name)
+  end
 end

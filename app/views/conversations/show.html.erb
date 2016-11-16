@@ -41,7 +41,7 @@
     <span class="time-stamp"><%= @conversation.created_at.strftime('%b %d, %Y') %></span>
     <div class="subtitle text-truncate-75">
       <% if @conversation.participants.count > 1 %>
-        Discussion: <%= @conversation.participants.distinct.map(&:first_name).join(', ') %>
+        Discussion: <%= @conversation.unique_participants.join(', ') %>
       <% else %>
         Reflection
       <% end %>
@@ -51,10 +51,7 @@
     <h1><%= @conversation.subject %></h1>
     
     <div class="subtitle">
-      <% unless @conversation.source_link.empty? %>
-        <a href="<%= @conversation.source_link %>">Inspiration</a> | 
-      <% end %>
-      <%= link_to "mark as unread", mark_as_unread_participation_path(@participation), method: :post %>
+      <%= link_to "Inspiration", @conversation.source_link unless @conversation.source_link.empty? %>
     </div>
   </div>
 
@@ -67,7 +64,7 @@
         <span class="time-stamp hidden-xs"><%= time_ago(c.created_at) %></span>
         <span class="time-stamp visible-xs"><%= time_ago_short(c.created_at) %></span>
         <div class="text-truncate-preview">
-          <h5 class="pull-left"><%= c.commenter.name %></h5>
+          <h5 class="pull-left"><%= c.commenter.first_name %></h5>
           <span class="toggleable-preview-text"><%= strip_tags(c.content.gsub('<br>',' ')) %></span>
         </div>
       </div>
@@ -77,7 +74,7 @@
         <div class="fit-comment toggleable">
           <span class="time-stamp hidden-xs"><%= time_ago(c.created_at) %></span>
           <span class="time-stamp visible-xs"><%= time_ago_short(c.created_at) %></span>
-          <h5><%= c.commenter.name %></h5>
+          <h5><%= c.commenter.first_name %></h5>
         </div>
 
         <div class="fit-comment-content">
@@ -90,7 +87,7 @@
     <div class="fit-comment">
       <span class="time-stamp hidden-xs"><%= time_ago(last_comment.created_at) %></span>
       <span class="time-stamp visible-xs"><%= time_ago_short(last_comment.created_at) %></span>
-      <h5><%= last_comment.commenter.name %></h5>
+      <h5><%= last_comment.commenter.first_name %></h5>
     </div>
 
     <div class="fit-comment-content fit-last-comment">
@@ -106,8 +103,37 @@
     <%= f.hidden_field :participation_id, value: @participation.id %>
     <%= f.hidden_field :conversation_id, value: @conversation.id %>
 
-    <div class="page-content">
-      <h5><%= current_user.name %></h5>
+    <div class="fit-wayt-to fit-bottom-border preview-text">
+
+      <div class="pull-left">
+        <a href="#" class="dropdown-toggle btn btn-wayt-to" data-toggle="dropdown">+</a>
+        <ul class="dropdown-menu wayt-to-dropdown">
+          <% current_user.all_active_friendships.each do |friendship| %>
+            <% friend = friendship.get_friend(current_user) %>
+            <% if @conversation.unique_participants.any? { |f| f == friend.first_name } %>
+              <li class="disabled"><%= link_to friend.first_name, "#", method: :post %></li>
+            <% else %>
+              <li><%= link_to friend.first_name, add_participant_conversation_path(friend_id: friend.id), method: :post %></li>
+            <% end %>   
+          <% end %>
+        </ul>
+      </div>
+
+      <div class="preview-text">
+        <%= @conversation.recipient_ids %>
+        <span class="hidden-xs">To: &nbsp; </span> 
+        <% if @conversation.participants.count > 1 %>
+          <%= @conversation.unique_participants.join(', ') %>
+        <% else %>
+          Self
+        <% end %>
+      </div>
+
+    </div>
+
+    <div class="page-content">  
+      <h5><%= current_user.first_name %></h5>
+      
       <%= f.trix_editor :content, placeholder: 'what are your thoughts?' %>
     </div>
     <div class="bottom-bar center fit-top-border">

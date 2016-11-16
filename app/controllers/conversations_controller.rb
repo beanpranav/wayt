@@ -1,11 +1,10 @@
 # rubocop:disable Metrics/LineLength
 class ConversationsController < ApplicationController
-  before_action :set_conversation, only: [:show, :edit, :update, :destroy]
+  before_action :set_conversation, only: [:show, :edit, :update, :destroy, :add_participant]
   before_action :authenticate_admin, only: [:index, :destroy]
   before_action :authenticate_owner, only: [:edit, :update, :destroy]
   before_action :authenticate_participation, only: [:show]
   before_action :authenticate_user!
-
 
   def index
     @conversations = Conversation.all
@@ -64,6 +63,23 @@ class ConversationsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to root_path, notice: 'Conversation deleted.' }
     end
+  end
+
+  def add_participant
+    # raise params
+    @conversation.recipient_ids_will_change!
+    @conversation.update_attribute(:recipient_ids, @conversation.recipient_ids << params[:friend_id])
+    @conversation.save
+
+    friend_participation = @conversation.participations.build(user_id: params[:friend_id], others_count: @conversation.recipient_ids.length)
+    friend_participation.save
+    UserNotifier.new_participant_email(@conversation, current_user, params[:friend_id]).deliver if friend_participation.user.conversation_notifications?
+
+    @conversation.participations.each do |part|
+      part.update_attribute(:others_count, @conversation.recipient_ids.length)
+    end
+
+    redirect_to @conversation, notice: 'Friend added.'
   end
 
   private
