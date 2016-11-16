@@ -41,7 +41,7 @@
     <span class="time-stamp"><%= @conversation.created_at.strftime('%b %d, %Y') %></span>
     <div class="subtitle text-truncate-75">
       <% if @conversation.participants.count > 1 %>
-        Discussion: <%= @conversation.unique_participants.join(', ') %>
+        Discussion: <%= @conversation.ordered_participants.join(', ') %>
       <% else %>
         Reflection
       <% end %>
@@ -110,7 +110,7 @@
         <ul class="dropdown-menu wayt-to-dropdown">
           <% current_user.all_active_friendships.each do |friendship| %>
             <% friend = friendship.get_friend(current_user) %>
-            <% if @conversation.unique_participants.any? { |f| f == friend.first_name } %>
+            <% if @conversation.ordered_participants.any? { |f| f == friend.first_name } %>
               <li class="disabled"><%= link_to friend.first_name, "#", method: :post %></li>
             <% else %>
               <li><%= link_to friend.first_name, add_participant_conversation_path(friend_id: friend.id), method: :post %></li>
@@ -122,7 +122,7 @@
       <div class="preview-text">
         <span class="hidden-xs">To: &nbsp; </span> 
         <% if @conversation.participants.count > 1 %>
-          <%= @conversation.unique_participants.join(', ') %>
+          <%= @conversation.ordered_participants.drop(1).join(', ') %>
         <% else %>
           Self
         <% end %>

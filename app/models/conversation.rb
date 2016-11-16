@@ -12,7 +12,7 @@ class Conversation < ActiveRecord::Base
   belongs_to :owner, class_name: 'User', foreign_key: :user_id
   belongs_to :friendship
 
-  has_many :participations, dependent: :destroy
+  has_many :participations, -> { order 'id ASC' }, dependent: :destroy
   has_many :participants, through: :participations, source: :user
   has_many :engaged_participations, through: :comments, source: :participation
 
@@ -22,7 +22,11 @@ class Conversation < ActiveRecord::Base
     Participation.find_by(user_id: current_user_id, conversation_id: id)
   end
 
-  def unique_participants
-    participants.distinct.map(&:first_name)
+  def ordered_participants
+    names = []
+    participations.each do |p|
+      names << p.user.first_name
+    end
+    names
   end
 end
