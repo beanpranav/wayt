@@ -37,7 +37,7 @@ class UserNotifier < ActionMailer::Base
     @friend = User.find(recipient_id)
     @conversation = conversation
     mail(to: @friend.email,
-         subject: "[#{@user.first_name} started a discussion] #{@conversation.subject}")
+         subject: "#{@conversation.subject} - #{@user.first_name} started discussing.")
   end
 
   # NEW PARTICIPANT
@@ -46,7 +46,7 @@ class UserNotifier < ActionMailer::Base
     @friend = User.find(recipient_id)
     @conversation = conversation
     mail(to: @friend.email,
-         subject: "[#{@user.first_name} invited you to a discussion] #{@conversation.subject}")
+         subject: "#{@conversation.subject} - #{@user.first_name} added you.")
   end
 
   # NEW COMMENT
@@ -55,6 +55,6 @@ class UserNotifier < ActionMailer::Base
     @friend = recipient
     @conversation = conversation
     mail(to: @friend.email,
-         subject: "[#{@user.first_name} wrote a reply] #{@conversation.subject}")
+         subject: "#{@user.first_name} replied to #{@conversation.subject}")
   end
 end
