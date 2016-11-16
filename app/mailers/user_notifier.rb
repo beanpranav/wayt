@@ -2,6 +2,13 @@
 class UserNotifier < ActionMailer::Base
   default from: '"What are your thoughts?" <notification@whatareyourthoughts.org>'
 
+  # ADMIN EMAILS: NEW USER
+  def admin_new_user_email(user)
+    @user = user
+    mail(to: admin_email,
+         subject: "[New User] #{@user.name} just signed up!")
+  end
+
   # WELCOME EMAIL
   def welcome_email(user)
     @user = user
@@ -49,12 +56,5 @@ class UserNotifier < ActionMailer::Base
     @conversation = conversation
     mail(to: @friend.email,
          subject: "[#{@user.first_name} wrote a reply] #{@conversation.subject}")
-  end
-
-  # ADMIN EMAILS: NEW USER
-  def admin_new_user_email(user)
-    @user = user
-    mail(to: admin_email,
-         subject: "[New User] #{@user.name} just signed up!")
   end
 end
