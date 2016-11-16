@@ -120,7 +120,6 @@
       </div>
 
       <div class="preview-text">
-        <%= @conversation.recipient_ids %>
         <span class="hidden-xs">To: &nbsp; </span> 
         <% if @conversation.participants.count > 1 %>
           <%= @conversation.unique_participants.join(', ') %>
