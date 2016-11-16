@@ -6,7 +6,7 @@ class UserNotifier < ActionMailer::Base
   def welcome_email(user)
     @user = user
     mail(to: @user.email,
-         subject: "[What are your thoughts?] Welcome, #{@user.first_name}!")
+         subject: "Welcome, #{@user.first_name}!")
   end
 
   # FRIEND REQUESTS: SEND & ACCEPT
@@ -14,14 +14,14 @@ class UserNotifier < ActionMailer::Base
     @user = user
     @friend = friend
     mail(to: @friend.email,
-         subject: "[What are your thoughts?] #{@user.first_name} has sent you a friend request!")
+         subject: "#{@user.first_name} has sent you a friend request!")
   end
 
   def friend_request_accept_email(user, friend)
     @user = user
     @friend = friend
     mail(to: @user.email,
-         subject: "[What are your thoughts?] #{@friend.first_name} has accepted your friend request!")
+         subject: "#{@friend.first_name} has accepted your friend request!")
   end
 
   # NEW CONVERSATION
@@ -55,6 +55,6 @@ class UserNotifier < ActionMailer::Base
   def admin_new_user_email(user)
     @user = user
     mail(to: admin_email,
-         subject: "[WAYT? New User] #{@user.name} just signed up!")
+         subject: "[New User] #{@user.name} just signed up!")
   end
 end
