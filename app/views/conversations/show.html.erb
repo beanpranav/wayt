@@ -122,7 +122,7 @@
       <div class="preview-text">
         <span class="hidden-xs">To: &nbsp; </span> 
         <% if @conversation.participants.count > 1 %>
-          <%= @conversation.ordered_participants.drop(1).join(', ') %>
+          <%= @conversation.ordered_participants.select { |p| p != current_user.first_name }.join(', ') %>
         <% else %>
           Self
         <% end %>
