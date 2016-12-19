@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
-  helper_method :authenticate_admin, :admin_email
+  helper_method :authenticate_admin
 
   protected
 
@@ -28,9 +28,5 @@ class ApplicationController < ActionController::Base
     else
       redirect_to root_path, notice: "You don't have permission to view this page."
     end
-  end
-
-  def admin_email
-    'pranav@whatareyourthoughts.org'
   end
 end

@@ -5,7 +5,7 @@ class UserNotifier < ActionMailer::Base
   # ADMIN EMAILS: NEW USER
   def admin_new_user_email(user)
     @user = user
-    mail(to: admin_email,
+    mail(to: 'pranav@whatareyourthoughts.org',
          subject: "[New User] #{@user.name} just signed up!")
   end
 

@@ -23,4 +23,10 @@ class RegistrationsController < Devise::RegistrationsController
     current_user.toggle!(:notification_comment)
     redirect_to notification_settings_path, notice: 'Notification settings updated.'
   end
+
+  protected
+
+  def after_sign_up_path_for(_resource)
+    root_path
+  end
 end

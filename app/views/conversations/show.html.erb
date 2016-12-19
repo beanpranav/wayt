@@ -51,7 +51,13 @@
     <h1><%= @conversation.subject %></h1>
     
     <div class="subtitle">
-      <%= link_to "Inspiration", @conversation.source_link unless @conversation.source_link.empty? %>
+      <% unless @conversation.source_link.empty? %>
+        <% if ( @conversation.source_link =~ /^http/ ) %>
+          <%= link_to "Inspiration", @conversation.source_link %>
+        <% else %>
+          <%= link_to "Inspiration", "http://#{@conversation.source_link}" %>
+        <% end %>
+      <% end %>
     </div>
   </div>
 
