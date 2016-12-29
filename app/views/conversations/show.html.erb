@@ -40,11 +40,7 @@
 
     <span class="time-stamp"><%= @conversation.created_at.strftime('%b %d, %Y') %></span>
     <div class="subtitle text-truncate-75">
-      <% if @conversation.participants.count > 1 %>
-        Discussion: <%= @conversation.ordered_participants.join(', ') %>
-      <% else %>
-        Reflection
-      <% end %>
+      <%= @conversation.ordered_participants.join(', ') %>
       <%= "(" + @comments.count.to_s + ")" if @comments.count > 1 %>
     </div>
 
@@ -71,7 +67,7 @@
         <span class="time-stamp visible-xs"><%= time_ago_short(c.created_at) %></span>
         <div class="text-truncate-preview">
           <h5 class="pull-left"><%= c.commenter.first_name %></h5>
-          <span class="toggleable-preview-text"><%= strip_tags(c.content.gsub('<br>',' ')) %></span>
+          <span class="toggleable-preview-text"><%= strip_tags(c.content.gsub('<br>',' ').gsub('&nbsp;',' ')) %></span>
         </div>
       </div>
 

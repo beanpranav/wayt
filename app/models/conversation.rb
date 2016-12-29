@@ -16,7 +16,7 @@ class Conversation < ActiveRecord::Base
   has_many :participants, through: :participations, source: :user
   has_many :engaged_participations, through: :comments, source: :participation
 
-  has_many :comments
+  has_many :comments, -> { order 'id ASC' }
 
   def my_participation(current_user_id)
     Participation.find_by(user_id: current_user_id, conversation_id: id)

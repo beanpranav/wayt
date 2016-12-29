@@ -28,7 +28,7 @@ class ConversationsController < ApplicationController
     @conversation.recipient_ids = params[:recipient].nil? ? [] : params[:recipient][:ids]
 
     respond_to do |format|
-      if params[:comment][:content].present? && @conversation.save
+      if params[:comment][:content].present? && !params[:recipient].nil? && @conversation.save
         owner_participation = @conversation.participations.build(user_id: current_user.id, read: true, others_count: @conversation.recipient_ids.length)
         owner_participation.save
         @conversation.recipient_ids.each do |id|
@@ -43,6 +43,9 @@ class ConversationsController < ApplicationController
         format.html { render action: 'new' }
         unless params[:comment][:content].present?
           @conversation.errors.add(:subject, '& first comment cannot be blank.')
+        end
+        if params[:recipient].nil?
+          @conversation.errors.add(:recipient, 'cannot be blank.')
         end
       end
     end

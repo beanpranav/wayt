@@ -31,15 +31,11 @@
 				<h5 class="text-truncate-75"><%= c.subject %></h5>
 				
 				<div class="recipient-text text-truncate-75">
-					<% if c.participants.count > 1 %>
-					  Discussion: <%= c.engaged_participations.distinct.map { |ep| ep.user.first_name }.join(', ') %>
-					<% else %>
-					  Reflection
-					<% end %>
+					<%= c.engaged_participations.distinct.map { |ep| ep.user.first_name }.join(', ') %>
 					<%= "(" + c.comments.count.to_s + ")" if c.comments.count > 1 %>
 				</div>
 
-				<div class="preview-text text-truncate"><%= strip_tags(c.comments.last.content.gsub('<br>',' ')) %></div>
+				<div class="preview-text text-truncate"><%= strip_tags(c.comments.last.content.gsub('<br>',' ').gsub('&nbsp;',' ')) %></div>
 			</div>
 		</a>
 	<% end %>
